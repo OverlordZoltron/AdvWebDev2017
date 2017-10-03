@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div></div>
+        <script type="text/javascript">
+            let div = document.querySelector('div');
+            let myRequest = 'http://localhost:3000/todo';
+            let getJson;
+            let htmlString = '';
+
+            htmlString += '<table style="width:100%">';
+            htmlString += '<tr>';
+            htmlString += '<th>UserId</th>';
+            htmlString += '<th>Id</th>';
+            htmlString += '<th>Title</th>';
+            htmlString += '<th>Completed</th>';
+            htmlString += '</tr>';
+
+            fetch(myRequest)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        getJson = json;
+                        //console.log(json);
+                        for (let index in getJson) {
+                            htmlString += '<tr>';
+                            htmlString += '<td align="center">' + getJson[index].userId + '</td>';
+                            htmlString += '<td align="center">' + getJson[index].id + '</td>';
+                            htmlString += '<td align="center">' + getJson[index].title + '</td>';
+                            htmlString += '<td align="center">' + getJson[index].completed + '</td>';
+                            htmlString += '</tr>';
+
+                        }
+                        htmlString += '</table>';
+                        div.innerHTML += htmlString;
+                    });
+
+        </script> 
+    </body>
+</html>
