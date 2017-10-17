@@ -1,0 +1,6 @@
+mixin createDivs()
+    -var randomNumOfDivs = Math.floor(Math.random() * (50-20+1)) + 20;
+    -var classArray = ['still', 'rotate', 'shrink']
+    - for (var i = 0; i < randomNumOfDivs; i++)
+        -var rndClass = classArray[Math.floor(Math.random() * classArray.length)];
+        div( class=rndClass ) 404
