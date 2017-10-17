@@ -1,0 +1,12 @@
+mixin createGrid(results)
+    table.gridPadding(border="1")
+        tbody
+          - for (var row =0; row < results; row++)
+            tr
+                - for (var col =0; col < results; col++)
+                    -var color = '#' + ((1<<24)*Math.random()|0).toString(16);
+                    td(style={background: color}) #{color}
+                        br
+                        span(style="color:#ffffff;") #{color}
+                        
+                    
