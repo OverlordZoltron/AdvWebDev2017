@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1#textAlignCenter= title
+  h2#textAlignCenter=message
+  div.Absolute-Center()
+    p
+        a(href="../view") View
+    form#form(action="/update", method="post")
+      label#formLabels(for="firstName") First Name:
+      input(type="text", name="firstName" value=results.firstName)
+      br
+      label#formLabels(for="lastName") Last Name:
+      input(type="text", name="lastName" value=results.lastName)
+      br
+      label#formLabels(for="department") Department:
+      select(name="department")
+          option(value='0', disabled) -- Select --
+          each val in ['IT','HR','Sales','Accounting']
+              option(selected=results.department==val)= val
+      br
+      label#formLabels(for="startDate") Start Date:
+      -var date = new Date(results.startDate.toString());
+      -var day = date.getDate();
+      -var month = date.getMonth() + 1;
+      -var year = date.getFullYear();
+      -var myDate = year + "-" + month + "-" + day;
+      input(type="date", name="startDate" value=myDate)
+      br
+      label#formLabels(for="jobTitle") Job Title:
+      input(type="text", name="jobTitle" value=results.jobTitle)
+      br
+      label#formLabels(for="salary") Salary:
+      input(type="number", name="salary" value=results.salary)
+      br
+      input(type="hidden" name="_id" value=results._id)
+      input#submit(type="submit" value="Add Employee")

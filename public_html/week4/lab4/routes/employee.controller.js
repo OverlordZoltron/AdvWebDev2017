@@ -1,6 +1,6 @@
 
-var Review = require('./review.model');
-var debug = require('debug')('demo:review');
+var Employee = require('./employee.model');
+var debug = require('debug')('lab4:employee');
 
 module.exports.home = function (req, res) {
 
@@ -8,21 +8,24 @@ module.exports.home = function (req, res) {
 
         var msg = '';
 
-        Review.create({
-            author: req.body.name,
-            rating: req.body.rating,
-            reviewText: req.body.review
+        Employee.create({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            department: req.body.department,
+            startDate: req.body.startDate,
+            jobTitle: req.body.jobTitle,
+            salary: req.body.salary
         })
                 .then(function () {
-                    msg = 'Review was Saved';
+                    msg = 'Employee was Saved';
                     return;
                 })
                 .catch(function (err) {
-                    msg = 'Review was not Saved';
+                    msg = 'Employee was not Saved';
                     return err;
                 }).then(function (err) {
             res.render('index', {
-                title: 'home',
+                title: 'Employee',
                 message: msg,
                 error: err
             });
@@ -30,7 +33,7 @@ module.exports.home = function (req, res) {
 
     } else {
         res.render('index', {
-            title: 'home',
+            title: 'Employee',
             message: ''
         });
     }
@@ -42,7 +45,7 @@ module.exports.view = function (req, res) {
     var id = req.params.id,
             removed = '';
 
-    Review
+    Employee
             .find()
             .exec()
             .then(function (results) {
@@ -59,7 +62,7 @@ module.exports.delete = function (req, res) {
     var id = req.params.id,
             removed = 'ID not found';
     if (id) {
-        Review.remove({_id: id})
+        Employee.remove({_id: id})
                 .then(function () {
                     removed = `${id} has
                     been removed`;
@@ -91,17 +94,20 @@ module.exports.update = function (req, res) {
 
         id = req.body._id;
 
-        Review
+        Employee
                 .findById(id)
                 .exec()
-                .then(function (reviewData) {
+                .then(function (employeeData) {
                     // figure out why the data is not saving.  
                     //debug(req.body);
-                    reviewData.author = req.body.name;
-                    reviewData.rating = req.body.rating;
-                    reviewData.reviewText = req.body.review;
+                    employeeData.firstName = req.body.firstName;
+                    employeeData.lastName = req.body.lastName;
+                    employeeData.department = req.body.department;
+                    employeeData.startDate = req.body.startDate;
+                    employeeData.jobTitle = req.body.jobTitle;
+                    employeeData.salary = req.body.salary;
 
-                    return reviewData.save();
+                    return employeeData.save();
 
                 })
                 .then(function () {
@@ -118,7 +124,7 @@ module.exports.update = function (req, res) {
     }
 
     function finish(){
-        Review
+        Employee
             .findOne({'_id': id})
             .exec()
             .then(function (results) {
