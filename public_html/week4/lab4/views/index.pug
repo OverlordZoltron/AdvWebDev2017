@@ -1,44 +1,46 @@
 extends layout
 
 block content
-  h1#textAlignCenter= title
-  div.Absolute-Center()
-    h2#textAlignCenter=message
-    ul
-            -if (fNameMessage)
-                li= fNameMessage
-            -if (lNameMessage)
-                li= lNameMessage
-            -if (deptMessage)
-                li= deptMessage
-            -if (startDatMessage)
-                li= startDatMessage
-            -if (jobTitleMessage)
-                li= jobTitleMessage
-            -if (salaryMessage)
-                li= salaryMessage
-    p
-        a(href="./view") View
-    form#form(action="/", method="post")
-      label#formLabels(for="firstName") First Name:
-      input(type="text", name="firstName")
-      br
-      label#formLabels(for="lastName") Last Name:
-      input(type="text", name="lastName")
-      br
-      label#formLabels(for="department") Department:
-      select(name="department")
-          option(value='0', disabled, selected=true) -- Select --
-          each val in ['IT','HR','Sales','Accounting']
-              option= val
-      br
-      label#formLabels(for="startDate") Start Date:
-      input(type="date", name="startDate")
-      br
-      label#formLabels(for="jobTitle") Job Title:
-      input(type="text", name="jobTitle")
-      br
-      label#formLabels(for="salary") Salary:
-      input(type="number", name="salary")
-      br
-      input#submit(type="submit" value="Add Employee")
+  .container-fluid
+    h1.text-center= title
+    .row
+        div.col-md-8.mr-auto.ml-auto
+            h2.text-center=message
+            ul
+                    -if (fNameMessage)
+                        li= fNameMessage
+                    -if (lNameMessage)
+                        li= lNameMessage
+                    -if (deptMessage)
+                        li= deptMessage
+                    -if (startDatMessage)
+                        li= startDatMessage
+                    -if (jobTitleMessage)
+                        li= jobTitleMessage
+                    -if (salaryMessage)
+                        li= salaryMessage
+            p
+                a(href="./view") View
+            form#form(action="/", method="post")
+              label#formLabels(for="firstName") First Name:
+              input(type="text", name="firstName")
+              br
+              label#formLabels(for="lastName") Last Name:
+              input(type="text", name="lastName")
+              br
+              label#formLabels(for="department") Department:
+              select(name="department")
+                  option(value='0', disabled, selected=true) -- Select --
+                  each val in ['IT','HR','Sales','Accounting']
+                      option= val
+              br
+              label#formLabels(for="startDate") Start Date:
+              input(type="date", name="startDate")
+              br
+              label#formLabels(for="jobTitle") Job Title:
+              input(type="text", name="jobTitle")
+              br
+              label#formLabels(for="salary") Salary:
+              input(type="number", name="salary")
+              br
+              input#submit(type="submit" value="Add Employee")
