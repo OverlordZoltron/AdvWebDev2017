@@ -11,7 +11,7 @@ label {
     margin-right: 10px;
 }
 
-#formLabels {
+.formLabels {
     font-weight: bold;
     padding-right: 3px;
     padding-bottom: 5px;
@@ -23,30 +23,4 @@ label {
 
 #textAlignCenter {
     text-align: center;
-}
-
-.Absolute-Center {
-    display:block;
-    text-align:center;
-}
-
-#form
-{
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-#submit{
-    text-align: right;
-    margin-left: 220px;
-}
-
-.img.center {
-    display: block;
-    margin: 0 auto;
-    padding-bottom: 20px;
 }
