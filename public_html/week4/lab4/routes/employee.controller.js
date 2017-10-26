@@ -24,11 +24,24 @@ module.exports.home = function (req, res) {
                     msg = 'Employee was not Saved';
                     return err;
                 }).then(function (err) {
-            res.render('index', {
-                title: 'Employee',
-                message: msg,
-                error: err
-            });
+                    if(err){
+                        res.render('index', {
+                            title: 'Employee',
+                            message: msg,
+                            fNameMessage: err.errors.firstName,
+                            lNameMessage: err.errors.lastName,
+                            deptMessage: err.errors.department,
+                            startDateMessage: err.errors.startDate,
+                            jobTitleMessage: err.errors.jobTitle,
+                            salaryMessage: err.errors.salary
+                        });
+                    }
+                    else{
+                        res.render('index', {
+                            title: 'Employee',
+                            message: msg
+                        });
+                    }
         });
 
     } else {

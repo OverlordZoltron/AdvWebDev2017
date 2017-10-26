@@ -11,7 +11,7 @@ var employeeSchema = new mongoose.Schema({
     },
     department: {
         type: String,
-        required: [true, 'A department is required']
+        required: [true, 'A Department is required']
     },
     startDate: {
         type: Date,
@@ -23,7 +23,7 @@ var employeeSchema = new mongoose.Schema({
     },
     salary: {
         type: Number,
-        required: true,
+        required: [true, 'A Salary is required'],
         min: 0,
         max: 10000000
     }

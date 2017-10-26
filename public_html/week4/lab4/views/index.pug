@@ -4,6 +4,19 @@ block content
   h1#textAlignCenter= title
   div.Absolute-Center()
     h2#textAlignCenter=message
+    ul
+            -if (fNameMessage)
+                li= fNameMessage
+            -if (lNameMessage)
+                li= lNameMessage
+            -if (deptMessage)
+                li= deptMessage
+            -if (startDatMessage)
+                li= startDatMessage
+            -if (jobTitleMessage)
+                li= jobTitleMessage
+            -if (salaryMessage)
+                li= salaryMessage
     p
         a(href="./view") View
     form#form(action="/", method="post")
