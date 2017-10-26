@@ -5,7 +5,14 @@ block content
     h1.text-center= title
     .row
         .col-md-6.mr-auto.ml-auto
-            h2.text-center=message
+            .text-center
+                -if(errMessage)
+                    h4
+                        span.badge.badge-secondary.badge-danger=errMessage
+                -if(message)
+                    h4
+                        span.badge.badge-secondary.badge-success=message
+                        
             p.text-center
                 a(href="./view") View
             form(action="/", method="post")

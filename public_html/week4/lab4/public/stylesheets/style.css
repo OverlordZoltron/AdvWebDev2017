@@ -24,3 +24,8 @@ label {
 #textAlignCenter {
     text-align: center;
 }
+
+#theadDark {
+    color: #fff;
+    background-color: #717171;
+}

@@ -5,9 +5,10 @@ var debug = require('debug')('lab4:employee');
 module.exports.home = function (req, res) {
 
     if (req.method === 'POST') {
-
+        
         var msg = '';
-
+        var ErrMsg = '';
+        var GoodMsg = '';
         Employee.create({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -17,17 +18,17 @@ module.exports.home = function (req, res) {
             salary: req.body.salary
         })
                 .then(function () {
-                    msg = 'Employee was Saved';
+                    GoodMsg = 'Employee was Saved';
                     return;
                 })
                 .catch(function (err) {
-                    msg = 'Employee was not Saved';
+                    ErrMsg = 'Employee was not Saved';
                     return err;
                 }).then(function (err) {
                     if(err){
                         res.render('index', {
                             title: 'Employee',
-                            message: msg,
+                            errMessage: ErrMsg,
                             fNameMessage: err.errors.firstName,
                             lNameMessage: err.errors.lastName,
                             deptMessage: err.errors.department,
@@ -39,7 +40,7 @@ module.exports.home = function (req, res) {
                     else{
                         res.render('index', {
                             title: 'Employee',
-                            message: msg
+                            message: GoodMsg
                         });
                     }
         });

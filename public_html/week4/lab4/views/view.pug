@@ -1,40 +1,43 @@
 extends layout
 
 block content
-    h1=title
-    p
-        a(href="../") Home
-    p=removed
-    if results.length
-        table(border="1")
-            thead   
-                tr
-                    th First Name
-                    th Last Name
-                    th Department
-                    th Start Date
-                    th Job Title
-                    th Salary
-                    th
-                    th
-            tbody
-              each employee in results
-                tr
-                    td 
-                        =employee.firstName
-                    td 
-                        =employee.lastName
-                    td 
-                        =employee.department
-                    td 
-                        =employee.startDate.toDateString()
-                    td 
-                        =employee.jobTitle
-                    td 
-                        =employee.salary
-                    td
-                        a(href="../update/"+employee._id) Update
-                    td
-                        a(href="../delete/"+employee._id) Delete
-    else
-        p No results found
+    .container-fluid
+        h1.text-center= title
+    .row
+        .col-md-8.mr-auto.ml-auto
+            p.text-center
+                a(href="../") Home
+            p=removed
+            if results.length
+                table.table.table-striped.table-bordered.table-hover()
+                    thead#theadDark   
+                        tr
+                            th First Name
+                            th Last Name
+                            th Department
+                            th Start Date
+                            th Job Title
+                            th Salary
+                            th
+                            th
+                    tbody
+                      each employee in results
+                        tr
+                            td 
+                                =employee.firstName
+                            td 
+                                =employee.lastName
+                            td 
+                                =employee.department
+                            td 
+                                =employee.startDate.toDateString()
+                            td 
+                                =employee.jobTitle
+                            td 
+                                =employee.salary
+                            td
+                                a(href="../update/"+employee._id) Update
+                            td
+                                a(href="../delete/"+employee._id) Delete
+            else
+                p No results found
