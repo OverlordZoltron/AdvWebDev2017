@@ -13,7 +13,7 @@ module.exports.home = function (req, res) {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             department: req.body.department,
-            startDate: req.body.startDate,
+            startDate: new Date(req.body.startDate + ' EDT'),
             jobTitle: req.body.jobTitle,
             salary: req.body.salary
         })
@@ -117,7 +117,7 @@ module.exports.update = function (req, res) {
                     employeeData.firstName = req.body.firstName;
                     employeeData.lastName = req.body.lastName;
                     employeeData.department = req.body.department;
-                    employeeData.startDate = req.body.startDate;
+                    employeeData.startDate = new Date(req.body.startDate + ' EDT');
                     employeeData.jobTitle = req.body.jobTitle;
                     employeeData.salary = req.body.salary;
 
