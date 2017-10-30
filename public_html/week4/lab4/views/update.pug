@@ -1,41 +1,69 @@
 extends layout
 
 block content
-  h1#textAlignCenter= title
-  h2#textAlignCenter=message
-  div.Absolute-Center()
-    p
-        a(href="../view") View
-    form#form(action="/update", method="post")
-      label#formLabels(for="firstName") First Name:
-      input(type="text", name="firstName" value=results.firstName)
-      br
-      label#formLabels(for="lastName") Last Name:
-      input(type="text", name="lastName" value=results.lastName)
-      br
-      label#formLabels(for="department") Department:
-      select(name="department")
-          option(value='0', disabled) -- Select --
-          each val in ['IT','HR','Sales','Accounting']
-              option(selected=results.department==val)= val
-      br
-      label#formLabels(for="startDate") Start Date:
-      -var date = new Date(results.startDate.toString());
-      -var day = date.getDate();
-      -var month = date.getMonth() + 1;
-      -var year = date.getFullYear();
-      if (day < 10)
-        -var day = '0' + day
-      if (month < 10)
-        -var month = '0' + month
-      -var myDate = year + "-" + month + "-" + day;
-      input(type="date", name="startDate" value=myDate)
-      br
-      label#formLabels(for="jobTitle") Job Title:
-      input(type="text", name="jobTitle" value=results.jobTitle)
-      br
-      label#formLabels(for="salary") Salary:
-      input(type="number", name="salary" value=results.salary)
-      br
-      input(type="hidden" name="_id" value=results._id)
-      input#submit(type="submit" value="Add Employee")
+  .container-fluid
+    h1.text-center= title
+    .row
+        .col-md-6.mr-auto.ml-auto
+            .text-center
+                -if(errMessage)
+                    h4
+                        span.badge.badge-secondary.badge-danger=errMessage
+                -if(message)
+                    h4
+                        span.badge.badge-secondary.badge-success=message
+                        
+            p.text-center
+                a(href="./view") View
+            form(action="/update", method="post")
+                .form-group
+                  label.formLabels(for="firstName") First Name:
+                  input(type="text", name="firstName", class=(fNameMessage)?"form-control is-invalid":"form-control", value=results.firstName)
+                  -if(fNameMessage)
+                    .invalid-feedback
+                        p=fNameMessage
+                .form-group
+                  label.formLabels(for="lastName") Last Name:
+                  input(type="text", name="lastName", class=(lNameMessage)?"form-control is-invalid":"form-control", value=results.lastName)
+                  -if(lNameMessage)
+                    .invalid-feedback
+                        p=lNameMessage
+                .form-group
+                  label.formLabels(for="department") Department:
+                  select(name="department" class=(deptMessage)?"form-control is-invalid":"form-control")
+                      option(value='0', disabled, selected=true) -- Select --
+                      each val in ['IT','HR','Sales','Accounting']
+                        option(selected=results.department==val)= val
+                  -if(deptMessage)
+                    .invalid-feedback
+                        p=deptMessage
+                .form-group
+                  label.formLabels(for="startDate") Start Date:
+                  -var date = new Date(results.startDate.toString());
+                  -var day = date.getDate();
+                  -var month = date.getMonth() + 1;
+                  -var year = date.getFullYear();
+                  if (day < 10)
+                    -var day = '0' + day
+                  if (month < 10)
+                    -var month = '0' + month
+                  -var myDate = year + "-" + month + "-" + day;
+                  input.form-control(type="date", name="startDate", value=myDate, class=(startDateMessage)?"form-control is-invalid":"form-control")
+                  -if(startDateMessage)
+                    .invalid-feedback
+                        p=startDateMessage
+                .form-group
+                  label.formLabels(for="jobTitle") Job Title:
+                  input.form-control(type="text", name="jobTitle", class=(jobTitleMessage)?"form-control is-invalid":"form-control", value=results.jobTitle)
+                  -if(jobTitleMessage)
+                    .invalid-feedback
+                        p=jobTitleMessage
+                .form-group
+                  label.formLabels(for="salary") Salary:
+                  input.form-control(type="number", name="salary", class=(salaryMessage)?"form-control is-invalid":"form-control", value=results.salary)
+                  -if(salaryMessage)
+                    .invalid-feedback
+                        p=salaryMessage
+                .form-group
+                  input(type="hidden" name="_id" value=results._id)
+                  input.btn.btn-primary.float-right(type="submit" value="Update Employee")
