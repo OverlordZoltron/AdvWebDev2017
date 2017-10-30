@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var ctrlEmployee = require('./employee.controller');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+// reviews
+router.get('/employees', ctrlEmployee.employeesReadAll);
+router.get('/employees/:employeeid', ctrlEmployee.employeesReadOne);
+router.post('/employees', ctrlEmployee.employeesCreate);
+router.put('/employees/:employeeid', ctrlEmployee.employeesUpdateOne);
+router.delete('/employees/:employeeid', ctrlEmployee.employeesDeleteOne);
+
 
 module.exports = router;
