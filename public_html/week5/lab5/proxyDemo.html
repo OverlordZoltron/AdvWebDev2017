@@ -112,6 +112,7 @@
                     throw new TypeError("Oops, we haven't got JSON!");
                 }).then(function(jsonText) {
                     results.value = jsonText;
+                    //document.getElementByName("firstName").value = jsonText.firstName;
                 }).catch(function(err) {
                     console.log(err);
                 });              
