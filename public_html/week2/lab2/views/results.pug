@@ -1,14 +1,14 @@
 extends layout
 
 block content
-  h1#textAlignCenter= title
-  p#textAlignCenter
-    label#resultsLabels() Name: #{aName}
+  h1.text-center= title
+  p.text-center
+    label.resultsLabels() Name: #{aName}
     br
-    label#resultsLabels() Email: #{anEmail}
+    label.resultsLabels() Email: #{anEmail}
     br
-    label#resultsLabels() Comments: #{comments}
-  p#textAlignCenter
-    a#links(href="./") Index
-    a#links(href="./about") About
-    a#links(href="./form") Form
+    label.resultsLabels() Comments: #{comments}
+  p.text-center
+    a.links(href="./") Index
+    a.links(href="./about") About
+    a.links(href="./form") Form

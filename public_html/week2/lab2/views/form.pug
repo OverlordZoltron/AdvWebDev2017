@@ -1,20 +1,25 @@
 extends layout
 
 block content
-  h2#textAlignCenter= title
-  div.Absolute-Center()
-    form#form(action="/results", method="post")
-      label#formLabels(for="name") Name:
-      input(type="text", name="name")
-      br
-      label#formLabels(for="email") Email:
-      input(type="text", name="email")
-      br
-      label#formLabels(for="comments") Comments:
-      textarea(rows="1", name="comments")
-      br
-      input#submit(type="submit")
-  p#textAlignCenter
-    a#links(href="./") Index
-    a#links(href="./about") About
-    a#links(href="./form") Form
+  .container-fluid
+    h1.text-center= title
+    .row
+        .col-md-6.mr-auto.ml-auto
+            form(action="/results", method="post")
+                .form-group
+                    label.formLabels(for="name") Name:
+                    input.form-control(type="text", name="name")
+                .form-group
+                    label.formLabels(for="email") Email:
+                    input.form-control(type="text", name="email")
+                .form-group
+                    label.formLabels(for="comments") Comments:
+                    textarea.form-control(rows="1", name="comments")
+                .form-group
+                    input.btn.btn-primary.float-right(type="submit" value="Submit")
+    .row
+        .col-md-6.mr-auto.ml-auto
+            p.text-center.formParagraph
+              a.links(href="./") Index
+              a.links(href="./about") About
+              a.links(href="./form") Form
