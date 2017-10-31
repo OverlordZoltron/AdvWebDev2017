@@ -34,17 +34,17 @@
         
         Data:<br />  
         
-        First Name <input type="text" name="firstName" value="" />
+        First Name <input type="text" name="firstName" value="" id="firstName" />
         <br />
-        Last Name <input type="text" name="lastName" value="" />
+        Last Name <input type="text" name="lastName" value="" id="lastName"/>
         <br />
-        Department <input type="text" name="department" list="departments" placeholder="--Select--">        
+        Department <input type="text" name="department" list="departments" placeholder="--Select--" id="department">        
         <br />
-        Start Date <input type="date" name="startDate">        
+        Start Date <input type="date" name="startDate" id="startDate">        
         <br />
-        Job Title <input type="text" name="jobTitle" >
+        Job Title <input type="text" name="jobTitle" id="jobTitle">
         <br />
-        Salary <input type="number" name="salary" >
+        Salary <input type="number" name="salary" id="salary">
         <br />
                 
         <br />
@@ -113,6 +113,33 @@
                 }).then(function(jsonText) {
                     results.value = jsonText;
                     //document.getElementByName("firstName").value = jsonText.firstName;
+                    var getData = JSON.parse(results.value);
+                    
+                    if(Array.isArray(getData))
+                    {
+                        document.getElementById("firstName").value = "";
+                        document.getElementById("lastName").value = "";
+                        document.getElementById("jobTitle").value = "";
+                        document.getElementById("salary").value = "";
+                    } else {
+                        document.getElementById("firstName").value = getData.firstName;
+                        document.getElementById("lastName").value = getData.lastName;
+                        document.getElementById("jobTitle").value = getData.jobTitle;
+                        document.getElementById("salary").value = getData.salary;
+                        document.getElementById("department").value = getData.department;
+                        var date = new Date(getData.startDate.toString());
+                        date = new Date(date.getTime() + 300*60*1000);
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+                        if (day < 10)
+                            var day = '0' + day
+                        if (month < 10)
+                            var month = '0' + month
+                        var myDate = year + "-" + month + "-" + day;
+                        document.getElementById("startDate").value = myDate;
+                        
+                    }
                 }).catch(function(err) {
                     console.log(err);
                 });              
