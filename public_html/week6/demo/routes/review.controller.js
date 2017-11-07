@@ -11,8 +11,8 @@ module.exports.reviewsReadAll = function(req, res) {
     debug('Getting all reviews');
     
     //var where = {};
-    var options = {};
-    options.sort = null;
+    //var options = {};
+    //options.sort = null;
        
     if (req.query) {
         debug(req.query);
@@ -21,21 +21,21 @@ module.exports.reviewsReadAll = function(req, res) {
          * https://www.npmjs.com/package/hpp         
          * ?_sort=author&_sort=author = && typeof(req.query._sort) === 'string' 
          */
-        if (req.query._sort && typeof(req.query._sort) === 'string') {
-            var prefix = 1;
-            if (req.query._sort.match(/-/)) prefix = -1;
-            var field = req.query._sort.replace(/-|\s/g, '');
-            options.sort = {};
-            options.sort[field] = prefix;
-        }
+//        if (req.query._sort && typeof(req.query._sort) === 'string') {
+//            var prefix = 1;
+//            if (req.query._sort.match(/-/)) prefix = -1;
+//            var field = req.query._sort.replace(/-|\s/g, '');
+//            options.sort = {};
+//            options.sort[field] = prefix;
+//        }
         
     }
     
-    debug('where', req.where);
-    debug('options', options);
+    //debug('where', req.where);
+    //debug('options', req.options);
     
     Review
-     .find(req.where, null, options)
+     .find(req.where, null, req.options)
      .exec()
      .then(function(results){
         sendJSONresponse(res, 200, results);

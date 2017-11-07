@@ -1,5 +1,5 @@
 var Employee = require('./employee.model');
-var debug = require('debug')('lab5:employee');
+var debug = require('debug')('lab6:employee');
 
 function sendJSONresponse(res, status, content) {
     res.status(status);
@@ -9,8 +9,20 @@ function sendJSONresponse(res, status, content) {
 module.exports.employeesReadAll = function(req, res) {
         
     debug('Getting all employees');
+    
+    //var where = {};
+       
+    if (req.query) {
+        debug(req.query);
+          
+        /* Prevent Parameter Pollution
+         * https://www.npmjs.com/package/hpp         
+         * ?_sort=author&_sort=author = && typeof(req.query._sort) === 'string' 
+         */
+    }
+    
     Employee
-     .find()
+     .find(req.where, null, req.options)
      .exec()
      .then(function(results){
         sendJSONresponse(res, 200, results);

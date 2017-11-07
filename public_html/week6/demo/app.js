@@ -33,6 +33,8 @@ app.use(queryHandler.cors);
 
 app.use(queryHandler.search());
 
+app.use(queryHandler.sort());
+
 app.use('/api/v1', index);
 app.use('/users', users);
 

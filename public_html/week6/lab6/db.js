@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var debug = require('debug')('lab5:mongo');
+var debug = require('debug')('lab6:mongo');
 var gracefulShutdown;
 var dbURI = 'mongodb://localhost/Empl';
 if (process.env.NODE_ENV === 'production') {
