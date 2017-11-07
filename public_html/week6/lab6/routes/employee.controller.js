@@ -9,18 +9,7 @@ function sendJSONresponse(res, status, content) {
 module.exports.employeesReadAll = function(req, res) {
         
     debug('Getting all employees');
-    
-    //var where = {};
-       
-    if (req.query) {
-        debug(req.query);
-          
-        /* Prevent Parameter Pollution
-         * https://www.npmjs.com/package/hpp         
-         * ?_sort=author&_sort=author = && typeof(req.query._sort) === 'string' 
-         */
-    }
-    
+
     Employee
      .find(req.where, null, req.options)
      .exec()
@@ -30,7 +19,6 @@ module.exports.employeesReadAll = function(req, res) {
      .catch(function(err){
         sendJSONresponse(res, 404, err);         
      });
-    
 };
 
 module.exports.employeesReadOne = function(req, res) {

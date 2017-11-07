@@ -70,7 +70,7 @@
         
             function makeCall() {
                 
-                let params = {};   
+                let params = {date : new Date()};   
                 
                 if (document.querySelector('input[name="order"]:checked')) {
                     params['_sort'] = document.querySelector('input[name="order"]:checked').value + document.querySelector('select[name="sort"]').value
