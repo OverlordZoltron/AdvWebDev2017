@@ -37,11 +37,7 @@ class View {
                         <label class="label">Rating</label>
                         <select name="rating" class="select" required>
                             <option value=""></option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
+                            ${[1,2,3,4,5,6].map(num => `<option value="${num}">${num}</option>`).join('')}
                         </select>
                     </div>
                     <div class="field">
