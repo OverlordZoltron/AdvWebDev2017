@@ -3,42 +3,60 @@ class View {
     get home() {
         return Promise.resolve(`<section class="hero is-info is-small spacer">
                     <div class="hero-body">
-                        <h1 class="title">Todo Crud Sample</h1>
+                        <h1 class="title">All Employees</h1>
                     </div>
                 </section>
                 <p data-bind-model="deleteResultMsg" data-bind-safe data-bind-class="{'is-success': 'isDeleted', 'is-danger': '!isDeleted' }" class="notification is-spaced"></p>              
                 <table class="table is-spaced is-bordered is-hoverable is-fullwidth is-small">
                   <thead>
                     <tr class="is-selected">
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Completed</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Department</th>
+                        <th>Job Title</th>
+                        <th>Salary</th>
+                        <th>Start Date</th>
                         <th></th>
                         <th></th>
                     </tr>
                   </thead>
-                  <tbody data-bind-model="todoTable"></tbody>
+                  <tbody data-bind-model="employeeTable"></tbody>
               </table>`)
     }
     
      get add() {
         return Promise.resolve(`<section class="hero is-info is-small spacer">
                     <div class="hero-body">
-                        <h1 class="title">Add New Todo</h1>
+                        <h1 class="title">Add New Employee</h1>
                     </div>
                 </section>
                 <form data-no-submit>
                     <div class="field">
-                        <label class="label">Title</label>
-                        <input type="text" name="title" class="input" required />
+                        <label class="label">First Name</label>
+                        <input type="text" name="firstName" class="input" required />
+                    </div>
+                    <div class="field">
+                        <label class="label">Last Name</label>
+                        <input type="text" name="lastName" class="input" required />
                     </div>
                     <div class="field">
                         <label class="label">Completed</label>
-                        <select name="completed" class="select" required>
+                        <select name="department" class="select" required>
                             <option value=""></option>
-                            <option value="true">true</option>
-                            <option value="false">false</option>
+                            ${['IT','HR','Sales','Accounting'].map(title => `<option value="${title}">${title}</option>`).join('')}
                         </select>
+                    </div>
+                    <div class="field">
+                        <label class="label">Job Title</label>
+                        <input type="text" name="jobTitle" class="input" required />
+                    </div>
+                    <div class="field">
+                        <label class="label">Salary</label>
+                        <input type="number" name="salary" class="input" required />
+                    </div>
+                    <div class="field">
+                        <label class="label">Start Date</label>
+                        <input type="date" name="startDate" class="input" required />
                     </div>
                     <div class="field"> 
                         <input type="reset" value="reset" />

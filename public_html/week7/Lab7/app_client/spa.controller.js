@@ -5,7 +5,7 @@ class Controller {
     }
 
     home() {
-        return this.Model.getTodoList()
+        return this.Model.getEmployeeList()
     }
     
     add() { 
