@@ -43,23 +43,35 @@ class Model extends BaseModel {
     
     }
     
-    saveTodo(evt) {
+    saveEmployee(evt) {
         
         let form = evt.target.form        
         if (!form.checkValidity()) {
             this.dataBindModel.saveResultMsg = 'All fields are required'
             return Promise.resolve()
         }
+        /*
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        department: req.body.department,
+        startDate: new Date(req.body.startDate + ' EDT'),
+        jobTitle: req.body.jobTitle,
+        salary: req.body.salary
+        */
         const data = {
-           title : this.dataBindModel.title,
-           completed : this.dataBindModel.completed
+           firstName : this.dataBindModel.firstName,
+           lastName : this.dataBindModel.lastName,
+           department : this.dataBindModel.department,
+           startDate : new Date(this.dataBindModel.startDate + ' EDT'),
+           jobTitle : this.dataBindModel.jobTitle,
+           salary : this.dataBindModel.salary
         }                    
         return this.http.post(this.APIS.Employee, data)
                 .then( data => {
-                   this.dataBindModel.saveResultMsg = 'Todo Saved'
+                   this.dataBindModel.saveResultMsg = 'Employee Saved'
                    return data
                 }).catch( err => {
-                   this.dataBindModel.saveResultMsg = 'Todo was NOT Saved'   
+                   this.dataBindModel.saveResultMsg = 'Employee was NOT Saved'   
                    return err
                 })  
     }

@@ -59,8 +59,8 @@ class View {
                         <input type="date" name="startDate" class="input" required />
                     </div>
                     <div class="field"> 
-                        <input type="reset" value="reset" />
-                        <input type="button" value="submit" class="button is-link" data-bind-event="click:saveTodo" /> 
+                        <input type="reset" value="reset" class="button is-light is-danger is-outlined" />
+                        <input type="button" value="submit" class="button is-link is-pulled-right" data-bind-event="click:saveEmployee" /> 
                     </div>
                     <p data-bind-model="saveResultMsg" data-bind-safe data-bind-class="{'is-success': 'isAdded', 'is-danger': '!isAdded' }" class="notification"></p>
                 </form>`)
