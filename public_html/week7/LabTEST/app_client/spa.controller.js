@@ -9,6 +9,7 @@ class Controller {
     }
     
     test() {
+        this.Model.dataBindModel.isOn = false;
         return Promise.resolve();
     }
 
