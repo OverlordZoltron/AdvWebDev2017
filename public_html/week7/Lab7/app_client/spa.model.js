@@ -1,113 +1,128 @@
 class Model extends BaseModel {
 
     constructor() {
-        super()  
+        super()
         this.APIS = {
-            Employee : `//${window.location.hostname}:3001/api/v1/employees/`
+            Employee: `//${window.location.hostname}:3001/api/v1/employees/`
         }
     }
-    
+
     /*
-    getReviewList() {
-        return this.http.get(this.APIS.Reviews)
-                .then( data => {
-                    data.forEach((review) => {
-                        review.createdOnFormated = this.formatDate(review.createdOn)
-                    })
-                   return Components.todoTable(data).then(html => { return this.dataBindModel.todoTable = html })
-                })
-    }
-    */
-   
+     getReviewList() {
+     return this.http.get(this.APIS.Reviews)
+     .then( data => {
+     data.forEach((review) => {
+     review.createdOnFormated = this.formatDate(review.createdOn)
+     })
+     return Components.todoTable(data).then(html => { return this.dataBindModel.todoTable = html })
+     })
+     }
+     */
+
     getEmployeeList() {
         return this.http.get(this.APIS.Employee)
-                .then( data => {
+                .then(data => {
                     data.forEach((employee) => {
                         employee.startDateFormatted = this.formatDate(employee.startDate)
                         employee.salaryFormatted = this.formatNumber(employee.salary)
                     })
-                   return Components.employeeTable(data).then(html => { return this.dataBindModel.employeeTable = html })
+                    return Components.employeeTable(data).then(html => {
+                        return this.dataBindModel.employeeTable = html
+                    })
                 })
     }
-    
-    deleteTodo(evt) {
-       const url = `${this.APIS.Employee}${evt.target.dataset.id}`
-       return this.http.delete(url)
-                .then( ()=>{
-                   return this.dataBindModel.deleteResultMsg = 'Todo Deleted'                                
-                }).catch( err => {
-                    return this.dataBindModel.deleteResultMsg = 'Todo was NOT Deleted'                                 
-                }).then( () => {
-                   return this.getEmployeeList()
-                })
-    
+
+    deleteEmployee(evt) {
+        const url = `${this.APIS.Employee}${evt.target.dataset.id}`
+        return this.http.delete(url)
+                .then(() => {
+                    return this.dataBindModel.deleteResultMsg = 'Employee Deleted'
+                }).catch(err => {
+            return this.dataBindModel.deleteResultMsg = 'Employee was NOT Deleted'
+        }).then(() => {
+            return this.getEmployeeList()
+        })
+
     }
-    
+
     saveEmployee(evt) {
-        
-        let form = evt.target.form        
+
+        let form = evt.target.form
         if (!form.checkValidity()) {
             this.dataBindModel.saveResultMsg = 'All fields are required'
             return Promise.resolve()
         }
         /*
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        department: req.body.department,
-        startDate: new Date(req.body.startDate + ' EDT'),
-        jobTitle: req.body.jobTitle,
-        salary: req.body.salary
-        */
+         firstName: req.body.firstName,
+         lastName: req.body.lastName,
+         department: req.body.department,
+         startDate: new Date(req.body.startDate + ' EDT'),
+         jobTitle: req.body.jobTitle,
+         salary: req.body.salary
+         */
         const data = {
-           firstName : this.dataBindModel.firstName,
-           lastName : this.dataBindModel.lastName,
-           department : this.dataBindModel.department,
-           startDate : new Date(this.dataBindModel.startDate + ' EDT'),
-           jobTitle : this.dataBindModel.jobTitle,
-           salary : this.dataBindModel.salary
-        }                    
+            firstName: this.dataBindModel.firstName,
+            lastName: this.dataBindModel.lastName,
+            department: this.dataBindModel.department,
+            startDate: new Date(this.dataBindModel.startDate + ' EDT'),
+            jobTitle: this.dataBindModel.jobTitle,
+            salary: this.dataBindModel.salary
+        }
         return this.http.post(this.APIS.Employee, data)
-                .then( data => {
-                   this.dataBindModel.saveResultMsg = 'Employee Saved'
-                   return data
-                }).catch( err => {
-                   this.dataBindModel.saveResultMsg = 'Employee was NOT Saved'   
-                   return err
-                })  
-    }
-    
-    goToUpdatePage(evt) {
-        this.redirect('update',{id: evt.target.dataset.id})
-        return Promise.resolve()
-    }
-        
-    updatePageLoad() {
-        const url = `${this.APIS.Employee}${this.urlParams().get('id')}`
-        return this.http.get(url).then( data => {           
-            this.dataBindModel = {title: data.title, completed: data.completed, id: data.id }
-            return data
-        })     
+                .then(data => {
+                    this.dataBindModel.saveResultMsg = 'Employee Saved'
+                    return data
+                }).catch(err => {
+            this.dataBindModel.saveResultMsg = 'Employee was NOT Saved'
+            return err
+        })
     }
 
-    updateTodo(evt) {
-        let form = evt.target.form        
-         if (!form.checkValidity()) {
-             this.dataBindModel.updateResultMsg = 'All fields are required'
-             return Promise.resolve()
-         }
-        const data = {
-            title : this.dataBindModel.title,
-            completed : this.dataBindModel.completed
+    goToUpdatePage(evt) {
+        this.redirect('update', {id: evt.target.dataset.id})
+        return Promise.resolve()
+    }
+
+    updatePageLoad() {
+        const url = `${this.APIS.Employee}${this.urlParams().get('id')}`
+        return this.http.get(url).then(data => {
+            var date = new Date(data.startDate);
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            if (day < 10)
+                var day = '0' + day
+            if (month < 10)
+                var month = '0' + month
+            var myDate = year + "-" + month + "-" + day;
+            this.dataBindModel = {firstName: data.firstName, lastName: data.lastName, department: data.department, startDate: myDate, jobTitle: data.jobTitle, salary: data.salary, _id: data._id}
+            return data
+        })
+    }
+
+    updateEmployee(evt) {
+        let form = evt.target.form
+        if (!form.checkValidity()) {
+            this.dataBindModel.updateResultMsg = 'All fields are required'
+            return Promise.resolve()
         }
-         const url = `${this.APIS.Employee}${this.dataBindModel.id}`
-         return this.http.put(url, data)
-                 .then( data => {
-                     this.dataBindModel.updateResultMsg = 'Todo updated'
-                     return data
-                 }).catch( err => {
-                     this.dataBindModel.updateResultMsg = 'Todo was NOT updated'   
-                     return err
-                 })  
+        const data = {
+            firstName: this.dataBindModel.firstName,
+            lastName: this.dataBindModel.lastName,
+            department: this.dataBindModel.department,
+            startDate: new Date(this.dataBindModel.startDate + ' EDT'),
+            jobTitle: this.dataBindModel.jobTitle,
+            salary: this.dataBindModel.salary
+        }
+        const url = `${this.APIS.Employee}${this.dataBindModel._id}`
+        return this.http.put(url, data)
+                .then(data => {
+                    this.dataBindModel.updateResultMsg = 'Employee updated'
+                    return data
+                }).catch(err => {
+            this.dataBindModel.updateResultMsg = 'Employee was NOT updated'
+            return err
+        })
     }
 
     get isDeleted() {

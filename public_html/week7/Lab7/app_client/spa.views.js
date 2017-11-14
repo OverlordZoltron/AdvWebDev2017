@@ -77,23 +77,48 @@ class View {
     get update() {
         return Promise.resolve(`<section class="hero is-info is-small spacer">
                     <div class="hero-body">
-                        <h1 class="title">Update Todo ID <span data-bind-model="id" class="has-text-warning"></span></h1>
+                        <h1 class="title">Update Employee</h1>
                     </div>
                 </section>
                 <form data-no-submit>
                     <div class="field">
-                        <label class="label">Title</label>
-                        <input type="text" name="title" class="input" required />
+                        <label class="label">First Name</label>
+                        <div class="control">
+                            <input type="text" name="firstName" class="input" placeholder="First Name" required />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Last Name</label>
+                        <div class="control">
+                            <input type="text" name="lastName" class="input" placeholder="Last Name" required />
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Completed</label>
-                        <select name="completed" class="select" required>
-                            <option value="true">true</option>
-                            <option value="false">false</option>
+                        <select name="department" class="select" required>
+                            <option value=""></option>
+                            ${['IT','HR','Sales','Accounting'].map(title => `<option value="${title}">${title}</option>`).join('')}
                         </select>
                     </div>
                     <div class="field">
-                        <input type="button" value="submit" data-bind-event="click:updateTodo" class="button is-link" />
+                        <label class="label">Job Title</label>
+                        <div class="control">
+                            <input type="text" name="jobTitle" class="input" placeholder="Ex: Dept Chair" required />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Salary</label>
+                        <div class="control">
+                            <input type="text" name="salary" class="input" placeholder="100" required />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Start Date</label>
+                        <input type="date" name="startDate" class="input" required />
+                    </div>
+                    <div class="field">
+                        <input type="reset" value="reset" class="button is-light is-danger is-outlined" />
+                        <input type="button" value="submit" data-bind-event="click:updateEmployee" class="button is-link is-pulled-right" />
                     </div>
                     <p data-bind-model="updateResultMsg" data-bind-safe data-bind-class="{'is-success': 'isUpdated', 'is-danger': '!isUpdated' }" class="notification is-spaced"></p>
                 </form>`)
