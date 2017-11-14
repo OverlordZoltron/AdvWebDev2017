@@ -33,11 +33,15 @@ class View {
                 <form data-no-submit>
                     <div class="field">
                         <label class="label">First Name</label>
-                        <input type="text" name="firstName" class="input" required />
+                        <div class="control">
+                            <input type="text" name="firstName" class="input" placeholder="First Name" required />
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Last Name</label>
-                        <input type="text" name="lastName" class="input" required />
+                        <div class="control">
+                            <input type="text" name="lastName" class="input" placeholder="Last Name" required />
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Completed</label>
@@ -48,11 +52,15 @@ class View {
                     </div>
                     <div class="field">
                         <label class="label">Job Title</label>
-                        <input type="text" name="jobTitle" class="input" required />
+                        <div class="control">
+                            <input type="text" name="jobTitle" class="input" placeholder="Ex: Dept Chair" required />
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Salary</label>
-                        <input type="number" name="salary" class="input" required />
+                        <div class="control">
+                            <input type="text" name="salary" class="input" placeholder="100" required />
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Start Date</label>
